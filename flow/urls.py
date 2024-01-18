@@ -16,9 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from posts.views import post_list, post_detail, post_new
 
 urlpatterns = [
     path('admin/', include('allauth.urls')),
     path('admin/', admin.site.urls),
+    path('', post_list, name='post_list'),
+    path('post/<int:pk>/', post_detail, name='post_detail'),
+    path('post/new/', post_new, name='post_new'),
 
 ]
