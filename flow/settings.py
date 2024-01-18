@@ -53,6 +53,10 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
+# AUTHENTICATION
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
 ROOT_URLCONF = 'flow.urls'
 
 AUTHENTICATION_BACKENDS = [
