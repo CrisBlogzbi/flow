@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from posts.views import post_list, post_detail, post_new
 from allauth.urls import *
+from . import views
 
 import allauth.urls
 print(allauth.urls.urlpatterns) 
@@ -30,5 +31,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('post/new/', post_new, name='post_new'),
     path('post/<int:pk>/', post_detail, name='post_detail'),
+    path('post/<int:pk>/add_comment/', views.add_comment, name='add_comment'), 
     path('', post_list, name='post_list'),
 ]
