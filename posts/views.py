@@ -27,18 +27,18 @@ def post_new(request):
     return render(request, 'posts/post_edit.html', {'form': form})
 
 @login_required
-def add_comment(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-
+def add_comment(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = request.user
+            comment.author = request.user  
             comment.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('add_comment', post_id=post.id) 
     else:
         form = CommentForm()
 
-    return render(request, 'posts/add_comment.html', {'form': form})
+    return render(request, 'add_comment.html', {'form': form})
