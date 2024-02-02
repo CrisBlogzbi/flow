@@ -8,11 +8,12 @@ def post_list(request):
     return render(request, 'posts/post_list.html', {'posts': posts})
 
 @login_required
-# posts/views.py
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
-    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments})
+    form = CommentForm()  
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+
 
 
 @login_required
@@ -39,7 +40,7 @@ def add_comment(request, post_id):
             comment.post = post
             comment.author = request.user  
             comment.save()
-            return redirect('add_comment', post_id=post.id) 
+            return redirect('post_detail', post_id=post.id)
     else:
         form = CommentForm()
 
