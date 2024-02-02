@@ -8,10 +8,12 @@ def post_list(request):
     return render(request, 'posts/post_list.html', {'posts': posts})
 
 @login_required
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+# posts/views.py
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
     return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments})
+
 
 @login_required
 def post_new(request):
@@ -28,7 +30,7 @@ def post_new(request):
 
 @login_required
 def add_comment(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = Post.objects.get(id=post_id)
     
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -41,4 +43,4 @@ def add_comment(request, post_id):
     else:
         form = CommentForm()
 
-    return render(request, 'add_comment.html', {'form': form})
+    return render(request, 'posts/add_comment.html', {'form': form, 'post': post})

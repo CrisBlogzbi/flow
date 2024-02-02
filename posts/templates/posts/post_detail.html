@@ -4,10 +4,10 @@
 <p>Created at: {{ post.created_at }}</p>
 
 {% for comment in comments %}
-    <p>Comment by {{ comment.author.username }}: {{ comment.content }}</p>
+<a href="{% url 'add_comment' post_id=post.id %}">Add Comment</a>
 {% endfor %}
 
-<form method="POST" action="{% url 'add_comment' pk=post.pk %}">
+<form method="POST" action="{% url 'add_comment' post_id=post.pk %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Add Comment</button>

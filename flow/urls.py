@@ -16,21 +16,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from posts.views import post_list, post_detail, post_new
+from posts.views import post_list, post_detail, post_new, add_comment
 from allauth.urls import *
-from posts import views
+from allauth import urls as allauth_urls
+
 
 import allauth.urls
-print(allauth.urls.urlpatterns) 
 
 from allauth.urls import urlpatterns as allauth_urls
 path('accounts/', include(allauth_urls))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
+    path('accounts/', include(allauth.urls)),
     path('post/new/', post_new, name='post_new'),
-    path('post/<int:pk>/', post_detail, name='post_detail'),
-    path('post/<int:post_id>/add_comment/', views.add_comment, name='add_comment'), 
+    path('post/<int:post_id>/', post_detail, name='post_detail'),
+    path('post/<int:post_id>/add_comment/', add_comment, name='add_comment'), 
     path('', post_list, name='post_list'),
 ]

@@ -1,9 +1,9 @@
 {% block content %}
   <h2>Add Comment</h2>
-  <form method="POST" action="{% url 'add_comment' pk=post.pk %}">
+  <form method="POST" action="{% url 'add_comment' post_id=post.pk %}">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Add Comment</button>
   </form>
-  <a href="{% url 'post_detail' pk=post.pk %}">Back to post</a>
+  <a href="{% url 'post_detail' post.pk %}">Back to post</a>
 {% endblock %}
