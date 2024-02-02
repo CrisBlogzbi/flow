@@ -1,21 +1,24 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flow</title>    
-
-    <link rel="stylesheet" href="{% static 'posts/styles.css' %}">
+    <title>Flow</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 
 <body>
-{% for post in posts %}
-    <h2><a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a></h2>
-    <p>{{ post.content }}</p>
-    <p>Author: {{ post.author.username }}</p>
-    <p>Created at: {{ post.created_at }}</p>
-    <p>Number of Comments: {{ post.comment_set.count }}</p>  <!-- Add this line -->
-    <a href="{% url 'post_detail' post.pk %}">View Details</a>
-{% endfor %}
+    <ul class="post-list">
+        {% for post in posts %}
+            <li class="post-item">
+                <h2 class="post-title"><a href="{% url 'post_detail' post_id=post.id %}">{{ post.title }}</a></h2>
+                <p class="post-content">{{ post.content }}</p>
+                <p class="post-details">Author: {{ post.author.username }} | Created at: {{ post.created_at }}</p>
+                <p>Number of Comments: {{ post.comment_set.count }}</p>
+            </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
