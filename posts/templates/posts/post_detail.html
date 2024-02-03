@@ -15,6 +15,15 @@
         <p>{{ post.content }}</p>
         <p class="post-details">Author: {{ post.author.username }} | Created at: {{ post.created_at }}</p>
 
+        {% if request.user == post.author %}
+            <p>Author: {{ request.user.username }}</p>
+            <p>This is your post. Display the delete button here.</p>
+            <form method="POST" action="{% url 'delete_post' post_id=post.id %}">
+                {% csrf_token %}
+                <button type="submit">Delete Post</button>
+            </form>
+        {% endif %}
+        
         <div class="comments">
             {% for comment in comments %}
                 <div class="comment">

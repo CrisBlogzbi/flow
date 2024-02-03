@@ -64,3 +64,13 @@ def add_comment(request, post_id, parent_comment_id=None):
         form = CommentForm(post_id=post_id)
 
     return render(request, 'posts/add_comment.html', {'form': form, 'post': post})
+
+@login_required
+def delete_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if not post.is_author(request.user):
+        return render(request, 'error_page.html', {'error_message': 'You are not authorized to delete this post.'})
+    else:
+        post.delete()
+        return redirect('post_list') 
