@@ -20,6 +20,19 @@
                 <div class="comment">
                     <p>{{ comment.content }}</p>
                     <p class="comment-details">Author: {{ comment.author.username }} | Created at: {{ comment.created_at }}</p>
+        
+                    <form method="POST" action="{% url 'add_comment' post_id=post.id %}">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <button type="submit">Reply</button>
+                    </form>
+        
+                    {% for reply in comment.replies.all %}
+                        <div class="reply">
+                            <p>{{ reply.content }}</p>
+                            <p class="comment-details">Author: {{ reply.author.username }} | Created at: {{ reply.created_at }}</p>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endfor %}
         </div>

@@ -31,6 +31,7 @@ urlpatterns = [
     path('accounts/', include(allauth.urls)),
     path('post/new/', post_new, name='post_new'),
     path('post/<int:post_id>/', post_detail, name='post_detail'),
-    path('post/<int:post_id>/add_comment/', add_comment, name='add_comment'), 
+    path('post/<int:post_id>/add_comment/', add_comment, name='add_comment'),
+    path('post/<int:post_id>/add_comment/<int:parent_comment_id>/', add_comment, name='add_comment_reply'), 
     path('', post_list, name='post_list'),
 ]

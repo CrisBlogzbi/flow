@@ -10,9 +10,27 @@ def post_list(request):
 @login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    comments = Comment.objects.filter(post=post)
-    form = CommentForm()  
-    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form})
+    comments = Comment.objects.filter(post=post, parent_comment=None)
+    form = CommentForm()
+    reply_form = CommentForm()
+
+    if request.method == 'POST':
+        if 'parent_comment' in request.POST:
+            reply_form = CommentForm(request.POST)
+            if reply_form.is_valid():
+                reply = reply_form.save(commit=False)
+                reply.post = post
+                reply.author = request.user
+                reply.save()
+        else:
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                comment = form.save(commit=False)
+                comment.post = post
+                comment.author = request.user
+                comment.save()
+
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form})
 
 
 
@@ -30,18 +48,19 @@ def post_new(request):
     return render(request, 'posts/post_edit.html', {'form': form})
 
 @login_required
-def add_comment(request, post_id):
-    post = Post.objects.get(id=post_id)
-    
+def add_comment(request, post_id, parent_comment_id=None):
+    post = get_object_or_404(Post, id=post_id)
+
     if request.method == 'POST':
-        form = CommentForm(request.POST)
+        form = CommentForm(request.POST, post_id=post_id)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
-            comment.author = request.user  
+            comment.author = request.user
+            comment.parent_comment_id = parent_comment_id
             comment.save()
             return redirect('post_detail', post_id=post.id)
     else:
-        form = CommentForm()
+        form = CommentForm(post_id=post_id)
 
     return render(request, 'posts/add_comment.html', {'form': form, 'post': post})

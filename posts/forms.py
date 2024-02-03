@@ -9,4 +9,10 @@ class PostForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        fields = ('content',)
+        fields = ('content', 'parent_comment')
+
+    def __init__(self, *args, **kwargs):
+        post_id = kwargs.pop('post_id', None)
+        super(CommentForm, self).__init__(*args, **kwargs)
+        if post_id:
+            self.fields['parent_comment'].queryset = Comment.objects.filter(post__id=post_id, parent_comment__isnull=True)
