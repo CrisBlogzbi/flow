@@ -7,17 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flow</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}"></script>
 </head>
 
-{% block content %}
+<body>
     <div class="post-detail">
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
         <p class="post-details">Author: {{ post.author.username }} | Created at: {{ post.created_at }}</p>
 
         {% if request.user == post.author %}
-            <p>Author: {{ request.user.username }}</p>
-            <p>This is your post. Display the delete button here.</p>
+            <p>This is your post.</p>
             <form method="POST" action="{% url 'delete_post' post_id=post.id %}">
                 {% csrf_token %}
                 <button type="submit">Delete Post</button>
@@ -30,7 +30,9 @@
                     <p>{{ comment.content }}</p>
                     <p class="comment-details">Author: {{ comment.author.username }} | Created at: {{ comment.created_at }}</p>
         
-                    <form method="POST" action="{% url 'add_comment' post_id=post.id %}">
+                    <button class="add-comment-button">Reply</button>
+        
+                    <form method="POST" action="{% url 'add_comment' post_id=post.id %}" class="comment-form" style="display: none;">
                         {% csrf_token %}
                         {{ form.as_p }}
                         <button type="submit">Reply</button>
@@ -40,18 +42,30 @@
                         <div class="reply">
                             <p>{{ reply.content }}</p>
                             <p class="comment-details">Author: {{ reply.author.username }} | Created at: {{ reply.created_at }}</p>
+        
+                            <button class="add-comment-button">Reply</button>
+        
+                            <form method="POST" action="{% url 'add_comment' post_id=post.id %}" class="reply-form" style="display: none;">
+                                {% csrf_token %}
+                                {{ form.as_p }}
+                                <button type="submit">Reply</button>
+                            </form>
                         </div>
                     {% endfor %}
                 </div>
             {% endfor %}
         </div>
+        
 
         <h2>Add Comment</h2>
-        <form method="POST" action="{% url 'add_comment' post_id=post.id %}">
+        <form class="add-comment-form comment-form" method="POST" action="{% url 'add_comment' post_id=post.id %}">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Add Comment</button>
         </form>
+
         <a href="{% url 'post_list' %}">Back to Main Page</a>
     </div>
-{% endblock %}
+</body>
+
+</html>

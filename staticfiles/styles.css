@@ -70,3 +70,8 @@
 .comment-details a:hover {
     color: #004080;
 }
+
+.comment-form,
+.reply-form {
+    display: none;
+}

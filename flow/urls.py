@@ -19,6 +19,8 @@ from django.urls import path, include
 from posts.views import post_list, post_detail, post_new, add_comment, delete_post
 from allauth.urls import *
 from allauth import urls as allauth_urls
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 import allauth.urls
@@ -35,4 +37,4 @@ urlpatterns = [
     path('post/<int:post_id>/add_comment/<int:parent_comment_id>/', add_comment, name='add_comment_reply'), 
     path('post/<int:post_id>/delete/', delete_post, name='delete_post'),
     path('', post_list, name='post_list'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

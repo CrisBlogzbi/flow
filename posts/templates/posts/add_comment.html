@@ -7,14 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flow</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <script src="{% static 'script.js' %}"></script>
 </head>
 
 {% block content %}
-  <h2>Add Comment</h2>
-  <form method="POST" action="{% url 'add_comment' post_id=post.pk %}">
+<button class="add-comment-button">Add Comment</button>
+<form class="add-comment-form reply-form" method="POST" action="{% url 'add_comment' post_id=post.id %}" style="display: none;">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Add Comment</button>
-  </form>
+    <button type="submit">Reply</button>
+</form>
   <a href="{% url 'post_list' %}">Back to Main Page</a>
 {% endblock %}

@@ -14,6 +14,8 @@ def post_detail(request, post_id):
     form = CommentForm()
     reply_form = CommentForm()
 
+    user_is_author = post.is_author(request.user)
+
     if request.method == 'POST':
         if 'parent_comment' in request.POST:
             reply_form = CommentForm(request.POST)
@@ -30,7 +32,7 @@ def post_detail(request, post_id):
                 comment.author = request.user
                 comment.save()
 
-    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form})
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form, 'user_is_author': user_is_author})
 
 
 
