@@ -9,13 +9,16 @@
     <link rel="stylesheet" href="{% static 'styles.css' %}">
     <script src="{% static 'script.js' %}"></script>
 </head>
-
-{% block content %}
-<button class="add-comment-button">Add Comment</button>
-<form class="add-comment-form reply-form" method="POST" action="{% url 'add_comment' post_id=post.id %}" style="display: none;">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Reply</button>
-</form>
-  <a href="{% url 'post_list' %}">Back to Main Page</a>
-{% endblock %}
+<body>
+    {% block content %}
+        <button class="add-comment-button">Add Comment</button>
+        <form class="add-comment-form reply-form" method="POST" action="{% url 'add_comment' post_id=post.id %}">
+            {% csrf_token %}
+            {{ form.content }}
+            {{ form.parent_comment }}
+            <button type="submit">Reply</button>
+        </form>
+        <a href="{% url 'post_list' %}">Back to Main Page</a>
+    {% endblock %}
+</body>
+</html>

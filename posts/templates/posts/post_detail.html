@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,39 +24,46 @@
                 <button type="submit">Delete Post</button>
             </form>
         {% endif %}
-        
+
         <div class="comments">
-            {% for comment in comments %}
-                <div class="comment">
-                    <p>{{ comment.content }}</p>
-                    <p class="comment-details">Author: {{ comment.author.username }} | Created at: {{ comment.created_at }}</p>
-        
-                    <button class="add-comment-button">Reply</button>
-        
-                    <form method="POST" action="{% url 'add_comment' post_id=post.id %}" class="comment-form" style="display: none;">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit">Reply</button>
-                    </form>
-        
-                    {% for reply in comment.replies.all %}
-                        <div class="reply">
-                            <p>{{ reply.content }}</p>
-                            <p class="comment-details">Author: {{ reply.author.username }} | Created at: {{ reply.created_at }}</p>
-        
-                            <button class="add-comment-button">Reply</button>
-        
-                            <form method="POST" action="{% url 'add_comment' post_id=post.id %}" class="reply-form" style="display: none;">
-                                {% csrf_token %}
-                                {{ form.as_p }}
-                                <button type="submit">Reply</button>
-                            </form>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endfor %}
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="comment" id="comment-{{ comment.id }}">
+                        <p>{{ comment.content }}</p>
+                        <p class="comment-details">Author: {{ comment.author.username }} | Created at: {{ comment.created_at }}</p>
+
+                        <!-- "Reply" button for comments -->
+                        <button class="add-comment-button" data-comment-id="add">Add Comment</button>
+
+                        <!-- Reply form for comments -->
+                        <form method="POST" action="{% url 'add_comment_reply' post_id=post.id parent_comment_id=comment.id %}" class="comment-form reply-form">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <button type="submit">Reply</button>
+                        </form>
+
+                        {% for reply in comment.replies.all %}
+                            <div class="reply">
+                                <p>{{ reply.content }}</p>
+                                <p class="comment-details">Author: {{ reply.author.username }} | Created at: {{ reply.created_at }}</p>
+
+                                <!-- "Reply" button for replies -->
+                                <button class="add-comment-button" data-comment-id="{{ comment.id }}">Reply</button>
+
+                                <!-- Reply form for replies -->
+                                <form method="POST" action="{% url 'add_comment_reply' post_id=post.id parent_comment_id=comment.id %}" class="reply-form">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    <button type="submit">Reply</button>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No comments yet. Be the first to comment!</p>
+            {% endif %}
         </div>
-        
 
         <h2>Add Comment</h2>
         <form class="add-comment-form comment-form" method="POST" action="{% url 'add_comment' post_id=post.id %}">

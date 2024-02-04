@@ -1,34 +1,22 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var commentButtons = document.querySelectorAll(".add-comment-button");
-    var commentForms = document.querySelectorAll(".comment-form");
-    var replyForms = document.querySelectorAll(".reply-form");
+    var commentForms = document.querySelectorAll(".comment-form, .add-comment-form, .reply-form");
 
-    commentButtons.forEach(function (button, index) {
-        button.addEventListener("click", function () {
-            var commentForm = commentForms[index];
-            toggleFormVisibility(commentForm);
-        });
+    commentForms.forEach(function (form) {
+        form.style.display = "block"; // Hide all comment forms
     });
 
-    var replyButtons = document.querySelectorAll(".reply-button");
+    document.body.addEventListener("click", function (event) {
+        var button = event.target.closest(".add-comment-button");
+        if (button) {
+            var commentId = button.getAttribute("data-comment-id");
+            var formSelector = commentId === "add" ? ".add-comment-form" : ".comment-form[data-comment-id='" + commentId + "']";
+            var form = document.querySelector(formSelector);
 
-    replyButtons.forEach(function (button, index) {
-        button.addEventListener("click", function () {
-            var replyForm = replyForms[index];
-            toggleFormVisibility(replyForm);
-        });
+            if (form) {
+                form.style.display = form.style.display === "none" ? "block" : "none";
+            } else {
+                console.error("Form not found for Comment ID:", commentId);
+            }
+        }
     });
-
-    // Initially hide all comment and reply forms
-    commentForms.forEach(function (commentForm) {
-        commentForm.style.display = "none";
-    });
-
-    replyForms.forEach(function (replyForm) {
-        replyForm.style.display = "none";
-    });
-
-    function toggleFormVisibility(form) {
-        form.style.display = form.style.display === "none" ? "block" : "none";
-    }
 });
