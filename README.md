@@ -78,9 +78,9 @@ To maintain a vibrant and engaging theme, The Flow embraces a diverse color pale
 
 ## Deployment
 
-The Flow is deployed on GitHub Pages. Follow these simple steps to explore the platform:
+- Flow is deployed on Heroku and is curently not working. When run locally either by using "python manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application" it works without any issues. I've tried to identify the issue and I still wasn't able to find out the reason why it won't open on Heroku. I've tried asking both Cody and ChatGPT but it was to no use. So the only way to run the code is:
 
-1. Navigate to the "Settings" tab in your GitHub repository.
-2. Under "Code and automation," click on the "Pages" tab.
-3. Choose the source branch (main/root) for deployment.
-4. Save your settings, and find the live site link at the top of the page.
+1. Open a New Terminal.
+2. Return either "pyhton manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application"
+3. CTRL+Left-Click on the link that appears on the terminal.
+4. To close the server press CTRL+C.
