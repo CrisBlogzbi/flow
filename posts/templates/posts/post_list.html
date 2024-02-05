@@ -11,15 +11,19 @@
 </head>
 
 <body>
-    <div class="header">
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'account_logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'account_login' %}">Sign In</a>
-            <a href="{% url 'account_signup' %}">Sign Up</a>
-        {% endif %}
+    <div class="navbar">
+        <div class="navbar-buttons">
+            {% if request.user.is_authenticated %}
+                <a href="{% url 'account_logout' %}" class="nav-button">Logout</a>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="nav-button">Sign In</a>
+                <a href="{% url 'account_signup' %}" class="nav-button">Sign Up</a>
+            {% endif %}
+        </div>
     </div>
-    <a href="{% url 'post_new' %}"><button>New Post</button></a>
+
+    <a href="{% url 'post_new' %}" id="new_post_button" class="action-button">New Post</a>
+    
     <ul class="post-list">
         {% for post in posts %}
             <li class="post-item">
