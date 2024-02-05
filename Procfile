@@ -1,1 +1,1 @@
-web: guinicorn flow.wsgi:application
+web: gunicorn flow.wsgi:application
