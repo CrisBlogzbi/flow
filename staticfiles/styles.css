@@ -9,6 +9,11 @@
     padding-top: 60px;
 }
 
+#new_post_button:hover {
+    transition: 0.3s;
+    background-color: navy;
+}
+
 .post-item {
     border: 1px solid #ddd;
     margin-bottom: 20px;
@@ -119,6 +124,60 @@
 
 .action-button:hover {
     background-color: #45a049;
+}
+
+
+/* Style for buttons */
+button {
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+
+/* Delete Post button */
+button.delete-post-button {
+    background-color: red;
+    color: white;
+}
+
+/* Edit Comment button */
+.edit-comment-button {
+    background-color: blue;
+    padding: 0.3rem;
+    color: white;
+}
+
+.edit-comment-button:hover {
+    color: seagreen
+}
+
+/* Add Comment button */
+button.add-comment-button, a.add-comment-button {
+    background-color: navy;
+    color: white;
+}
+
+/* Back to Main Page button */
+a.back-to-main-button {
+    padding: 0.5rem;
+    background-color: green;
+    color: white;
+}
+
+/* Hover animation for buttons */
+button:hover, a:hover {
+    transition: 0.3s;
+    background-color: lighten(currentColor, 10%);
+    transform: scale(1.05);
+    color: seagreen;
+}
+
+/* Remove underline from links */
+a {
+    text-decoration: none;
 }
 
 

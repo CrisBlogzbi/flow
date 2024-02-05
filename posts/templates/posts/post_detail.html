@@ -22,7 +22,7 @@
             <p>This is your post.</p>
             <form method="POST" action="{% url 'delete_post' post_id=post.id %}">
                 {% csrf_token %}
-                <button type="submit">Delete Post</button>
+                <button type="submit" class="delete-post-button">Delete Post</button>
             </form>
         {% endif %}
 
@@ -34,7 +34,7 @@
                         <p class="comment-details">Author: {{ comment.author.username }} | Created at: {{ comment.created_at }}
                             {% if comment.edited_at %}| Last edited at: {{ comment.edited_at }}{% endif %}</p>
                         {% if request.user == comment.author %}
-                        <a href="{% url 'edit_comment' post_id=post.id comment_id=comment.id %}">Edit Comment</a>
+                        <a href="{% url 'edit_comment' post_id=post.id comment_id=comment.id %}" class="edit-comment-button">Edit Comment</a>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -48,10 +48,10 @@
             {% csrf_token %}
             {{ form.comment.as_hidden }} 
             {{ form.content.label_tag }} {{ form.content }}
-            <button type="submit">Add Comment</button>
+            <button type="submit" class="add-comment-button">Add Comment</button>
         </form>
 
-        <a href="{% url 'post_list' %}">Back to Main Page</a>
+        <a href="{% url 'post_list' %}"class="back-to-main-button">Back to Main Page</a>
     </div>
 </body>
 

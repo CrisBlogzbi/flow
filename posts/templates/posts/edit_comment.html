@@ -13,7 +13,7 @@
     <form method="post" action="{% url 'edit_comment' post_id=comment.post.id comment_id=comment.id %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Save changes</button>
+      <button type="submit" class="edit-comment-button">Save changes</button>
     </form>
     <a href="{% url 'post_detail' post_id=comment.post.id %}">Cancel</a>
   </body>
