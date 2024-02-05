@@ -1,10 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var commentForms = document.querySelectorAll(".comment-form, .add-comment-form, .reply-form");
 
-    commentForms.forEach(function (form) {
-        form.style.display = "block"; // Hide all comment forms
-    });
-
     document.body.addEventListener("click", function (event) {
         var button = event.target.closest(".add-comment-button");
         if (button) {
@@ -13,7 +9,15 @@ document.addEventListener("DOMContentLoaded", function () {
             var form = document.querySelector(formSelector);
 
             if (form) {
-                form.style.display = form.style.display === "none" ? "block" : "none";
+                // Toggle the visibility of the target form
+                form.style.display = form.style.display === "" || form.style.display === "none" ? "block" : "none";
+
+                // Hide all other comment forms
+                commentForms.forEach(function (otherForm) {
+                    if (otherForm !== form) {
+                        otherForm.style.display = "none";
+                    }
+                });
             } else {
                 console.error("Form not found for Comment ID:", commentId);
             }

@@ -1,11 +1,18 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, EditCommentForm
+from django.utils import timezone  
 
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'posts/post_list.html', {'posts': posts})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from .models import Post, Comment
+from .forms import PostForm, CommentForm, EditCommentForm
+from django.utils import timezone  
 
 @login_required
 def post_detail(request, post_id):
@@ -16,6 +23,8 @@ def post_detail(request, post_id):
 
     user_is_author = post.is_author(request.user)
 
+    comment_edit_forms = {comment.id: EditCommentForm(instance=comment) for comment in comments}
+
     if request.method == 'POST':
         if 'parent_comment' in request.POST:
             reply_form = CommentForm(request.POST)
@@ -24,6 +33,17 @@ def post_detail(request, post_id):
                 reply.post = post
                 reply.author = request.user
                 reply.save()
+        elif 'edit_comment_id' in request.POST:
+            edit_comment_id = request.POST['edit_comment_id']
+            comment_to_edit = get_object_or_404(Comment, pk=edit_comment_id)
+            if comment_to_edit.author == request.user:
+                comment_edit_forms[comment_to_edit.id] = EditCommentForm(request.POST, instance=comment_to_edit)
+                if comment_edit_forms[comment_to_edit.id].is_valid():
+                    edited_comment = comment_edit_forms[comment_to_edit.id].save(commit=False)
+                    edited_comment.edited_at = timezone.now()
+                    edited_comment.save()
+            else:
+                return render(request, 'error_page.html', {'error_message': 'You are not authorized to edit this comment.'})
         else:
             form = CommentForm(request.POST)
             if form.is_valid():
@@ -32,7 +52,8 @@ def post_detail(request, post_id):
                 comment.author = request.user
                 comment.save()
 
-    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form, 'user_is_author': user_is_author})
+    return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form, 'user_is_author': user_is_author, 'comment_edit_forms': comment_edit_forms})
+
 
 
 
@@ -76,3 +97,21 @@ def delete_post(request, post_id):
     else:
         post.delete()
         return redirect('post_list') 
+
+
+@login_required
+def edit_comment(request, post_id, comment_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+
+    if request.method == 'POST':
+        form = EditCommentForm(request.POST, instance=comment)
+        if form.is_valid():
+            edited_comment = form.save(commit=False)
+            edited_comment.edited_at = timezone.now()
+            edited_comment.save()
+            return redirect('post_detail', post_id=post_id)
+    else:
+        form = EditCommentForm(instance=comment)
+
+    return render(request, 'posts/edit_comment.html', {'form': form, 'comment': comment})

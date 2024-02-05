@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from posts.views import post_list, post_detail, post_new, add_comment, delete_post
+from posts.views import post_list, post_detail, post_new, add_comment, delete_post, edit_comment
 from allauth.urls import *
 from allauth import urls as allauth_urls
 from django.conf import settings
@@ -35,6 +35,7 @@ urlpatterns = [
     path('post/<int:post_id>/', post_detail, name='post_detail'),
     path('post/<int:post_id>/add_comment/', add_comment, name='add_comment'),
     path('post/<int:post_id>/add_comment/<int:parent_comment_id>/', add_comment, name='add_comment_reply'), 
+    path('post/<int:post_id>/edit_comment/<int:comment_id>/', edit_comment, name='edit_comment'),
     path('post/<int:post_id>/delete/', delete_post, name='delete_post'),
     path('', post_list, name='post_list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

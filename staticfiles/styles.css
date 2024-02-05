@@ -1,5 +1,3 @@
-/* posts/static/posts/styles.css */
-
 /* Style for post list */
 .post-list {
     list-style: none;
@@ -9,7 +7,7 @@
 .post-item {
     border: 1px solid #ddd;
     margin-bottom: 20px;
-    padding: 15px;
+    padding: 15px; 
     border-radius: 5px;
 }
 
