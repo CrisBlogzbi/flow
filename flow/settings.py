@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'django-insecure-px^)kgc4z51%kj7x^idxfk0j$sx#=q_0@nl!=x)jc=82ptvg75'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://flow-6d27515654ce.herokuapp.com/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -94,7 +93,10 @@ WSGI_APPLICATION = 'flow.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.parse("postgres://yrhbgtxw:dTfgtq2l6EVqrM6Sgyi-XFL9-ZJVUZBZ@tai.db.elephantsql.com/yrhbgtxw"),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
 
 
@@ -136,7 +138,6 @@ STATIC_URL = '/staticfiles/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'staticfiles')
 ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_root')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
