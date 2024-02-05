@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Post, Comment
-from .forms import PostForm, CommentForm, EditCommentForm
+from .forms import PostForm, CommentForm, EditCommentForm, EditPostForm
 from django.utils import timezone  
 
 def post_list(request):
@@ -109,3 +109,19 @@ def edit_comment(request, post_id, comment_id):
         form = EditCommentForm(instance=comment)
 
     return render(request, 'posts/edit_comment.html', {'form': form, 'comment': comment})
+
+@login_required
+def edit_post(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if request.method == 'POST':
+        form = EditPostForm(request.POST, instance=post)
+        if form.is_valid():
+            edited_post = form.save(commit=False)
+            edited_post.edited_at = timezone.now()
+            edited_post.save()
+            return redirect('post_detail', post_id=post_id)
+    else:
+        form = EditPostForm(instance=post)
+
+    return render(request, 'posts/edit_post.html', {'form': form, 'post': post})

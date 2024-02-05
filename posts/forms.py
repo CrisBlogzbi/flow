@@ -30,3 +30,8 @@ class EditCommentForm(forms.ModelForm):
     def set_comment(self, comment):
         # Set the initial data for the comment content
         self.fields['content'].initial = comment.content
+
+class EditPostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = ['title', 'content']

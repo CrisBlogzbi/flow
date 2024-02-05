@@ -23,4 +23,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+
+    var deletePostButton = document.querySelector(".delete-post-button");
+    if (deletePostButton) {
+        deletePostButton.addEventListener("click", function (event) {
+            if (!confirm("Are you sure you want to delete this post?")) {
+                event.stopImmediatePropagation();
+                event.preventDefault();
+            }
+        });
+    }
 });
