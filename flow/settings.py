@@ -94,6 +94,7 @@ WSGI_APPLICATION = 'flow.wsgi.application'
 
 DATABASES = {
     'default': {
+        'URl': 'postgres://yrhbgtxw:dTfgtq2l6EVqrM6Sgyi-XFL9-ZJVUZBZ@tai.db.elephantsql.com/yrhbgtxw',
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
