@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT flow.wsgi:application
+web: guinicorn flow.wsgi:application
