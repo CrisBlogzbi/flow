@@ -1,8 +1,8 @@
 # The Flow - Social Blogging Platform
 
-![Flow Header](assets/readme-images/header.png)
+![Flow Header](staticfiles/readme-images/main-page.png)
 
-Welcome to **The Flow**, a social blogging platform that lets you express yourself through posts and engage with other users. Dive into a dynamic and interactive space where sharing ideas, stories, and discussions flows seamlessly.
+Welcome to **Flow**, a social blogging platform that lets you express yourself through posts and engage with other users.
 
 ## Features
 
@@ -24,11 +24,12 @@ The platform offers a user-friendly environment for creating and exploring blog 
 - Number of comments displayed for each post on the main page.
 - User-specific actions like logging out or accessing account-related pages.
 
-![Post Interaction](assets/readme-images/select.png)
+![Post Interaction](staticfiles/readme-images/post-detail.png)
 
 - The interactive and visually appealing design enhances the overall user experience.
 
-![Answer-Hover](assets/readme-images/hover.png)
+![New Post Hover](staticfiles/readme-images/new-post-hover.png)
+![Title Hover](staticfiles/readme-images/post-title-hover.png)
 
 ## Styling
 
@@ -40,14 +41,6 @@ To maintain a vibrant and engaging theme, The Flow embraces a diverse color pale
 - Post content presented in calming light blue, fostering a sense of open communication and sharing.
 - Key action buttons, such as "New Post," are highlighted in a refreshing shade of green, promoting user engagement.
 
-![Color Palette](assets/readme-images/submit.png)
-
-### Responsive Design
-
-The platform is meticulously designed to adapt to various screen sizes, ensuring a seamless experience on devices ranging from laptops to smartphones.
-
-![Responsive Design](assets/readme-images/size-responsiveness.png)
-
 ## How to Use
 
 1. **Explore Posts:**
@@ -55,21 +48,33 @@ The platform is meticulously designed to adapt to various screen sizes, ensuring
 
 2. **Create a New Post:**
    - Click on the "New Post" button in the navbar to share your thoughts and stories.
+   ![New Post](staticfiles/readme-images/new-post-form.png)
 
 3. **Engage in Discussions:**
    - Access post details to read full content, view comments, and participate in discussions.
+   ![Add Comment](staticfiles/readme-images/add-comment.png)
 
-4. **Authentication:**
+4. **Edit your comments as well as your posts.**
+
+   ![Edit Comment](staticfiles/readme-images/edit-comment.png)
+   ![Edit Post](staticfiles/readme-images/edit-post.png)
+
+5. **Or even delete your posts.**
+
+   ![Delete Post](staticfiles/readme-images/delete-post.png)
+
+6. **Authentication:**
    - Log in or sign up to unlock personalized features and connect with the community.
+   ![Sign Up Form](staticfiles/readme-images/signup-form.png)
+   ![Sign Up Sign in](staticfiles/readme-images/signup-signin.png)
 
-5. **Optimized Experience:**
+7. **Optimized Experience:**
    - Enjoy a visually appealing and responsive design for an optimal browsing experience.
 
 ## Technologies Used
 
-- **Django:** Powering the backend and handling data models.
+- **Django/Python:** Powering the backend and handling data models.
 - **HTML, CSS, JavaScript:** Crafting the frontend and enhancing user interactions.
-- **SQLite:** Serving as the database for seamless data management.
 
 ## Deployment
 
@@ -79,9 +84,3 @@ The Flow is deployed on GitHub Pages. Follow these simple steps to explore the p
 2. Under "Code and automation," click on the "Pages" tab.
 3. Choose the source branch (main/root) for deployment.
 4. Save your settings, and find the live site link at the top of the page.
-
-[Explore The Flow](https://your-github-username.github.io/YourRepoName/)
-
-##### Developer Note
-
-- README.md crafted with the assistance of ChatGPT, inspired by the style of [ThePerfectEgg](https://github.com/CrisBlogzbi/ThePerfectEgg/tree/main)'s README.
