@@ -13,13 +13,13 @@
   <body>
     {% block content %}
         <h1>Edit Post</h1>
-        <form method="post" class="post-form">
+        <form method="post" class="post-form"> <!-- Edit existing Post -->
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="action-button">Save Changes</button>
+            <button type="submit" class="edit-comment-button" style="margin-bottom: 10px">Save Changes</button>
         </form>
     {% endblock %}
-
+    <a href="{% url 'post_detail' post_id=post.id %}" class="back-to-main-button">Cancel</a> <!-- Return to Post -->
 </body>
 
 </html>

@@ -4,10 +4,12 @@ from .models import Post, Comment
 from .forms import PostForm, CommentForm, EditCommentForm, EditPostForm
 from django.utils import timezone  
 
+# View for displaying a list of posts
 def post_list(request):
     posts = Post.objects.all()
     return render(request, 'posts/post_list.html', {'posts': posts})
 
+# View for displaying details of a specific post
 @login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -48,9 +50,7 @@ def post_detail(request, post_id):
 
     return render(request, 'posts/post_detail.html', {'post': post, 'comments': comments, 'form': form, 'reply_form': reply_form, 'user_is_author': user_is_author, 'comment_edit_forms': comment_edit_forms})
 
-
-
-
+# View for creating a new post
 @login_required
 def post_new(request):
     if request.method == "POST":
@@ -64,6 +64,7 @@ def post_new(request):
         form = PostForm()
     return render(request, 'posts/post_edit.html', {'form': form})
 
+# View for adding a comment to a post
 @login_required
 def add_comment(request, post_id, parent_comment_id=None):
     post = get_object_or_404(Post, id=post_id)
@@ -82,6 +83,7 @@ def add_comment(request, post_id, parent_comment_id=None):
 
     return render(request, 'posts/add_comment.html', {'form': form, 'post': post})
 
+# View for deleting a post
 @login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -92,7 +94,7 @@ def delete_post(request, post_id):
         post.delete()
         return redirect('post_list') 
 
-
+# View for editing a comment
 @login_required
 def edit_comment(request, post_id, comment_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -110,6 +112,7 @@ def edit_comment(request, post_id, comment_id):
 
     return render(request, 'posts/edit_comment.html', {'form': form, 'comment': comment})
 
+# View for editing a post
 @login_required
 def edit_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)

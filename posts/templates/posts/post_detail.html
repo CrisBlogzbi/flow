@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <div class="navbar">
+    <div class="navbar"> <!-- Navigation Bar -->
         <h2>~~~~Flow~~~~</h2>
         <div class="navbar-buttons">
             <a href="{% url 'post_new' %}" id="new_post_button" class="action-button">New Post</a>
@@ -25,16 +25,16 @@
             {% endif %}
         </div>
     </div>
-    <div class="post-detail">
+    <div class="post-detail">   <!-- Post -->
         <h2>{{ post.title }}</h2>
         <p class="post-content">{{ post.content }}</p>
         <p class="post-details">Author: {{ post.author.username }} | Created at: {{ post.created_at }}</p>
 
-        {% if user.is_authenticated and user == post.author %}
+        {% if user.is_authenticated and user == post.author %}  <!-- Post editing -->
             <a href="{% url 'edit_post' post_id=post.id %}" class="edit-post-button">Edit Post</a>
         {% endif %}
 
-        {% if request.user == post.author %}
+        {% if request.user == post.author %}    <!-- Post Deletion -->
             <form method="POST" action="{% url 'delete_post' post_id=post.id %}">
                 {% csrf_token %}
                 <button type="submit" class="delete-post-button">Delete Post</button>
@@ -42,7 +42,7 @@
             <p>This is your post.</p>
         {% endif %}
 
-        <div class="comments">
+        <div class="comments">  <!-- Comments and Details -->
             {% if comments %}
                 {% for comment in comments %}
                     <div class="comment" id="comment-{{ comment.id }}">
@@ -59,7 +59,7 @@
             {% endif %}
         </div>
 
-        <h3>Add Comment</h3>
+        <h3>Add Comment</h3>    <!-- Comment Form -->   
         <form class="add-comment-form comment-form" method="POST" action="{% url 'add_comment' post_id=post.id %}">
             {% csrf_token %}
             {{ form.comment.as_hidden }} 

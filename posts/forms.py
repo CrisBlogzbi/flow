@@ -1,11 +1,13 @@
 from django import forms
 from .models import Post, Comment
 
+# Form for creating a new post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ('title', 'content')
 
+# Form for adding a new comment
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -15,8 +17,10 @@ class CommentForm(forms.ModelForm):
         post_id = kwargs.pop('post_id', None)
         super(CommentForm, self).__init__(*args, **kwargs)
         if post_id:
+            # Limit parent_comment choices to top-level comments related to the specified post
             self.fields['parent_comment'].queryset = Comment.objects.filter(post__id=post_id, parent_comment__isnull=True)
 
+# Form for editing an existing comment
 class EditCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
@@ -28,9 +32,10 @@ class EditCommentForm(forms.ModelForm):
         self.fields['content'].required = False
 
     def set_comment(self, comment):
-        # Set the initial data for the comment content
+        # Set initial content for the form based on the existing comment
         self.fields['content'].initial = comment.content
 
+# Form for editing an existing post
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post

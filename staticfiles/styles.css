@@ -1,23 +1,27 @@
 /* Style for post list */
 
+/* General styling for HTML */
 html {
     background-color: rgb(17, 17, 17);
     color: rgb(228, 226, 226);
 }
 
+/* Styling for the list of posts */
 .post-list {
     list-style: none;
     padding: 0;
     margin-top: 70px;
 }
 
+/* Styling for each post item */
 .post-item {
     border: 1px solid #ddd;
     margin-bottom: 20px;
-    padding: 15px; 
+    padding: 15px;
     border-radius: 5px;
 }
 
+/* Styling for post titles in the list */
 .post-title a {
     text-decoration: none;
     color: rgb(228, 226, 226);
@@ -29,6 +33,7 @@ html {
     color: #0066cc;
 }
 
+/* Styling for post content in the list */
 .post-content {
     color: rgb(228, 226, 226);
     font-size: 1.3rem;
@@ -42,6 +47,7 @@ html {
     margin-top: 60px;
 }
 
+/* Styling for post detail headings */
 .post-detail h2 {
     font-size: 2rem;
     margin-bottom: 15px;
@@ -52,7 +58,7 @@ html {
     color: rgb(228, 226, 226);
 }
 
-/* Style for comments */
+/* Styling for comments */
 .comments {
     margin-top: 20px;
 }
@@ -81,7 +87,7 @@ html {
     color: #004080;
 }
 
-/* Style for navigation bar */
+/* Styling for the navigation bar */
 .navbar {
     position: fixed;
     top: 0;
@@ -125,7 +131,7 @@ html {
     margin-top: 4px;
 }
 
-/* Style for action buttons */
+/* Styling for action buttons */
 .action-button {
     display: inline-block;
     color: rgb(228, 226, 226);
@@ -141,8 +147,7 @@ html {
     background-color: #45a049;
 }
 
-
-/* Style for buttons */
+/* Styling for buttons */
 button {
     border: none;
     text-decoration: none;
@@ -151,14 +156,13 @@ button {
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
 }
 
-
-/* Delete Post button */
+/* Styling for the delete post button */
 button.delete-post-button {
     background-color: red;
     color: rgb(228, 226, 226);
 }
 
-/* Edit Comment and Post buttons*/
+/* Styling for edit comment and post buttons */
 .edit-comment-button, .edit-post-button {
     background-color: blue;
     padding: 0.4rem;
@@ -174,14 +178,13 @@ button.delete-post-button {
     margin-right: 1rem;
 }
 
-
-/* Add Comment button */
+/* Styling for add comment button */
 button.add-comment-button, a.add-comment-button {
     background-color: navy;
     color: rgb(228, 226, 226);
 }
 
-/* Back to Main Page button */
+/* Styling for back to main page button */
 a.back-to-main-button {
     padding: 0.5rem;
     background-color: green;
@@ -191,6 +194,7 @@ a.back-to-main-button {
 a.back-to-main-button:hover {
     background-color: navy;
 }
+
 /* Hover animation for buttons */
 button:hover, a:hover {
     transition: 0.3s;
@@ -204,9 +208,9 @@ a {
     text-decoration: none;
 }
 
-/* Forms */
-
-input[type="text"], textarea {
+/* Styling for forms */
+input[type="text"],
+textarea {
     background-color: #3B3B3B;
     color: rgb(228, 226, 226);
 }

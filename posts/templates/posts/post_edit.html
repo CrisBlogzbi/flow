@@ -13,10 +13,10 @@
 </head>
 
 <h2>New Post</h2>
-<form method="POST" action="{% url 'post_new' %}">
+<form method="POST" action="{% url 'post_new' %}">  <!-- Post Creation --> 
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="add-comment-button" style="margin-bottom: 10px">Save</button>
 </form>
-<a href="{% url 'post_list' %}" class="back-to-main-button">Back to Main Page</a>
+<a href="{% url 'post_list' %}" class="back-to-main-button">Back to Main Page</a> <!-- Return to Main Page --> 
 </html>
