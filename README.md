@@ -78,7 +78,7 @@ To maintain a vibrant and engaging theme, The Flow embraces a diverse color pale
 
 ## Deployment
 
-- Flow is deployed on Heroku and is curently not working. When run locally either by using "python manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application" it works without any issues. I wasn't able to change the DATABASE part of the settings.py to create an external database, so that's why I couldn't make it work on Heroku. I've tried asking both Cody and ChatGPT but it was to no use. So the only way to run the code is:
+- Flow is deployed on Heroku under https://flow-6d27515654ce.herokuapp.com/ and is curently not working. When run locally either by using "python manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application" it works without any issues. I wasn't able to change the DATABASE part of the settings.py to create an external database, so that's why I couldn't make it work on Heroku. I've tried asking both Cody and ChatGPT but it was to no use. So the only way to run the code is:
 
 1. Open a New Terminal.
 2. Return either "pyhton manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application"
