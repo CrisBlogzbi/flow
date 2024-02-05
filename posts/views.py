@@ -8,12 +8,6 @@ def post_list(request):
     posts = Post.objects.all()
     return render(request, 'posts/post_list.html', {'posts': posts})
 
-from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from .models import Post, Comment
-from .forms import PostForm, CommentForm, EditCommentForm
-from django.utils import timezone  
-
 @login_required
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)

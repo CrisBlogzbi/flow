@@ -22,15 +22,9 @@ from allauth import urls as allauth_urls
 from django.conf import settings
 from django.conf.urls.static import static
 
-
-import allauth.urls
-
-from allauth.urls import urlpatterns as allauth_urls
-path('accounts/', include(allauth_urls))
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include(allauth.urls)),
+    path('accounts/', include(allauth_urls), name='account'),
     path('post/new/', post_new, name='post_new'),
     path('post/<int:post_id>/', post_detail, name='post_detail'),
     path('post/<int:post_id>/add_comment/', add_comment, name='add_comment'),
