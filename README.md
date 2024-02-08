@@ -78,9 +78,18 @@ To maintain a vibrant and engaging theme, The Flow embraces a diverse color pale
 
 ## Deployment
 
-- Flow is deployed on Heroku under <https://flow-6d27515654ce.herokuapp.com/> and is curently not working. When run locally either by using "python manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application" it works without any issues. I wasn't able to change the DATABASE part of the settings.py to create an external database, so that's why I couldn't make it work on Heroku. I've tried asking both Cody and ChatGPT but it was to no use. So the only way to run the code is:
+- Flow is deployed on Heroku under <https://flow-203e46bb486c.herokuapp.com/>.
 
-1. Open a New Terminal.
-2. Return either "pyhton manage.py runserver" or "waitress-serve --host=127.0.0.1 --port=8000 flow.wsgi:application"
-3. CTRL+Left-Click on the link that appears on the terminal.
-4. To close the server press CTRL+C.
+1. Go to your Heroku Dashboard.
+2. Click on the "New" button.
+3. Select "Create new app".
+4. Enter a unique name for your app.
+5. Click on "Create app".
+6. Click on the "Deploy" tab.
+7. Click on "GitHub" and sign in with your GitHub account.
+8. Select your repository.
+9. Click on "Enable Automatic Deploys".
+10. Click on "Deploy Branch".
+11. Click on "View".
+12. Click on "Open App".
+13. You're all set!
