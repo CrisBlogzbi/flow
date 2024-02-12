@@ -76,6 +76,22 @@ To maintain a vibrant and engaging theme, The Flow embraces a diverse color pale
 - **Django/Python:** Powering the backend and handling data models.
 - **HTML, CSS, JavaScript:** Crafting the frontend and enhancing user interactions.
 
+## Testing
+
+- Tested deleting functionality on the post detail page.
+- Tested editing functionality on the post detail page.
+- Tested adding comments functionality on the post detail page.
+- Tested editing comments functionality on the post detail page.
+- Tested the functionality of the navbar.
+- Tested the functionality of the post list page.
+- Tested the functionality of the post detail page.
+- Tested the functionality of the user authentication.
+- Tested the functionality of the user profile page.
+- Tested the functionality of the new post page.
+- Tested the functionality of the login page.
+- Tested the functionality of "Back to main page" button/s.
+- Tested the functionality of the 404 page.
+
 ## Deployment
 
 - Flow is deployed on Heroku under <https://flow-203e46bb486c.herokuapp.com/>.
